@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light mode background */ /* Light mode text color */
+  --background-dark: #0a0a0a; /* Dark mode background */
+  --foreground-dark: #ededed; /* Dark mode text color */
+}
+
+/* Apply dark mode using the `data-theme` attribute */
+[data-theme="dark"] {
+  --background: var(--background-dark);
+  --foreground: var(--foreground-dark);
+}
+
+/* Global styles for transitions */
+body {
+  @apply transition-colors duration-300; /* Smooth color transitions */
+  background-color: var(--background);
+  font-family: "Inter", sans-serif;
+  /* letter-spacing: 0.3px; */
+}
+
+/* Tailwind dark mode support for smooth transitions on the switch toggle */
+[data-theme="dark"] body {
+  background-color: var(--background-dark);
+  color: var(--foreground-dark);
+}
+
+/* Additional styles for switching between light and dark modes */
+html {
+  transition:
+    background-color 0.3s,
+    color 0.3s; /* Smooth transitions */
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+
+.tableColumnName {
+  font-size: 11px;
+}

@@ -1,0 +1,35 @@
+pipeline {
+    agent any 
+    environment {
+       HOSTNAME = credentials('IBM-GGCOE-SERVER01-USERNAME')
+       HOSTIP = credentials('IBM-GGCOE-SERVER01-IP')
+       FILE_PATH = '/usr/share/nginx/html/DLT-Frontend/intelligrid-b2c-admin-portal/dev'
+    }    
+    stages {        
+        stage(' Node Build Process') { 
+            steps {
+                sh '''
+                echo "node build process"
+                export PATH="/Users/cipl/.nvm/versions/node/v22.13.0/bin/npm:/Users/cipl/.nvm/versions/node/v22.13.00/bin/node:/Users/cipl/.nvm/versions/node/v22.13.0/bin:$PATH"
+                npm install --os=darwin --cpu=arm64 sharp
+                npm i
+                npm run build
+                '''
+            }
+        }              
+        stage('Deployment File Process ') {            
+            steps {  
+                withCredentials([sshUserPrivateKey(credentialsId: 'IBM-GGCOE-SERVER01-SSH1', keyFileVariable: 'SSH_KEY')]) {
+                    script {
+                        sh(script: 'rsync -av -e "ssh -i $SSH_KEY " out/ ${HOSTNAME}@${HOSTIP}:${FILE_PATH}')
+                    }
+                }
+            }
+        }
+        stage('Cleaning Process') { 
+            steps {
+                deleteDir()
+            }
+        }
+    }
+}

@@ -1,0 +1,57 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
+  "plugins": ["react", "prettier", "unused-imports", "@typescript-eslint"],
+  "rules": {
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/no-unescaped-entities": "error",
+    "react/jsx-no-useless-fragment": "error",
+    "@next/next/no-img-element": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "error",
+      { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+    ],
+    // "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-debugger": "error",
+    "eqeqeq": ["error", "always"],
+    "curly": ["error", "all"],
+    "no-var": "error",
+    "prefer-const": "error",
+    "max-lines": ["error", { "max": 600, "skipComments": true }],
+    "complexity": ["error", { "max": 15 }],
+    "max-depth": ["error", 4],
+    "max-nested-callbacks": ["error", 3],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "vars": "all", "args": "after-used", "ignoreRestSiblings": true }
+    ],
+    // "@typescript-eslint/explicit-function-return-type": [
+    //   "error",
+    //   { "allowExpressions": true, "allowTypedFunctionExpressions": true, "allowAnonymousFunctions": true }
+    // ],
+    // "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/explicit-module-boundary-types": "error"
+  }
+}
